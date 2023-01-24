@@ -1,0 +1,43 @@
+package com.example.managepplapi.entities;
+
+import com.example.managepplapi.dtos.EnderecoDTO;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+
+@Embeddable
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class Endereco {
+
+    private String logradouro;
+    private String cep;
+    private String numero;
+    private String cidade;
+
+
+    public Endereco(EnderecoDTO dados) {
+        this.logradouro = dados.logradouro();
+        this.cep = dados.cep();
+        this.numero = dados.numero();
+        this.cidade = dados.cidade();
+    }
+
+    public void atualizarDadosEndereco(EnderecoDTO dados) {
+        if (dados.logradouro() != null) {
+            this.logradouro = dados.logradouro();
+        }
+        if (dados.cep() != null) {
+            this.cep = dados.cep();
+        }
+        if (dados.numero() != null) {
+            this.numero = dados.numero();
+        }
+        if (dados.cidade() != null) {
+            this.cidade = dados.cidade();
+        }
+    }
+}
