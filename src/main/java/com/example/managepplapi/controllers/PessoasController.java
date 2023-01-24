@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("pessoas")
@@ -73,22 +72,20 @@ public class PessoasController {
     @PostMapping("/endereco/{id}")
     @Transactional
     public void adicionarEndereco(@RequestBody @Valid EnderecoDTO dados, @PathVariable Long id) {
-        Optional<Pessoa> pessoaOptional = repository.findById(id);
 
-        if (pessoaOptional.isPresent()) {
-            Pessoa pessoa = pessoaOptional.get();
-            Endereco newAdress = new Endereco();
-            newAdress.setLogradouro(dados.logradouro());
-            newAdress.setCep(dados.cep());
-            newAdress.setNumero(dados.numero());
-            newAdress.setCidade(dados.cidade());
-            pessoa.getEnderecos().add(newAdress);
+        Pessoa pessoa = pessoaService.findById(id);
+        Endereco newAdress = new Endereco();
+        newAdress.setLogradouro(dados.logradouro());
+        newAdress.setCep(dados.cep());
+        newAdress.setNumero(dados.numero());
+        newAdress.setCidade(dados.cidade());
+        pessoa.getEnderecos().add(newAdress);
 
-            pessoaService.save(pessoa);
-
-
-        }
+        pessoaService.save(pessoa);
 
 
     }
+
+
 }
+
