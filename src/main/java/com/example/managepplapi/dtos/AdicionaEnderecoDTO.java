@@ -1,11 +1,14 @@
 package com.example.managepplapi.dtos;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.validation.constraints.NotBlank;
+import org.springframework.lang.Nullable;
+
 public record AdicionaEnderecoDTO(
 
-        String logradouro,
-        String cep,
-        String numero,
-        String cidade
-
+        @Nullable
+        @JsonIgnore
+        Long id,
+        EnderecoDTO novoEndereco
 ) {
 }

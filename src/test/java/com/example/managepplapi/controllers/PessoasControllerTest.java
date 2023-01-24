@@ -22,6 +22,7 @@ import org.springframework.data.domain.PageRequest;
 
 import java.time.LocalDate;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -50,7 +51,7 @@ class PessoasControllerTest {
     @BeforeEach
     void setUp() {
         endereco = new EnderecoDTO("Rua dos testes", "0424-004", "1020", "São José dos Testes");
-        newPessoa = new CriarPessoasDTO("Testinho", LocalDate.now(), endereco);
+        newPessoa = new CriarPessoasDTO("Testinho", LocalDate.now(), Collections.singletonList(endereco));
         pessoa = new Pessoa(newPessoa);
     }
 
@@ -60,7 +61,7 @@ class PessoasControllerTest {
 
         //salvando pessoa
         pessoasService.save(new Pessoa(newPessoa));
-        assertEquals("São José dos Testes", newPessoa.endereco().cidade());
+        assertEquals("São José dos Testes", newPessoa.enderecos().get(0).cidade());
 
     }
 
@@ -69,7 +70,6 @@ class PessoasControllerTest {
 
         pessoasService.save(pessoa);
         pessoa.setId(1l);
-
         //salvando pessoa como "Testinho"
 
         EditarPessoaDTO pessoaAtualziada = new EditarPessoaDTO(1l, "TestinhA", LocalDate.now(), endereco);
@@ -93,7 +93,6 @@ class PessoasControllerTest {
 
     @Test
     void deveriaLancarExceptionPessoaNaoEncontrada() {
-
         pessoa.setId(1l);
         // criando e setando Id da pessoa porém não salvando
 
@@ -106,7 +105,7 @@ class PessoasControllerTest {
         pessoa.setCadastrada(true);
 
         EnderecoDTO end2 = new EnderecoDTO("Rua dos testinhos", "1234-023", "421", "São José dos Testinhos");
-        CriarPessoasDTO newP2 = new CriarPessoasDTO("Testinha", LocalDate.now(), end2);
+        CriarPessoasDTO newP2 = new CriarPessoasDTO("Testinha", LocalDate.now(), Collections.singletonList(end2));
         Pessoa p2 = new Pessoa(newP2);
         pessoasService.save(p2);
         p2.setCadastrada(false);

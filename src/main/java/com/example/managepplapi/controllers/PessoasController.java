@@ -1,6 +1,7 @@
 package com.example.managepplapi.controllers;
 
 import com.example.managepplapi.dtos.*;
+import com.example.managepplapi.entities.Endereco;
 import com.example.managepplapi.entities.Pessoa;
 import com.example.managepplapi.repositories.PessoasRepository;
 import com.example.managepplapi.services.PessoasService;
@@ -11,6 +12,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @RequestMapping("pessoas")
@@ -29,7 +33,16 @@ public class PessoasController {
     @PostMapping
     @Transactional
     public void criarPessoa(@RequestBody @Valid CriarPessoasDTO dados) {
-        pessoaService.save(new Pessoa(dados));
+        Pessoa pessoa = new Pessoa();
+        pessoa.setNome(dados.nome());
+        pessoa.setDataDeNascimento(dados.dataDeNascimento());
+        pessoa.setCadastrada(true);
+        List<Endereco> enderecos = new ArrayList<>();
+        for (EnderecoDTO enderecoDTO : dados.enderecos()) {
+            enderecos.add(new Endereco(enderecoDTO));
+        }
+        pessoa.setEnderecos(enderecos);
+        pessoaService.save(pessoa);
     }
 
 
@@ -59,9 +72,13 @@ public class PessoasController {
     @PostMapping("/endereco/{id}")
     @Transactional
     public void adicionarEndereco(@RequestBody @Valid AdicionaEnderecoDTO dados, @PathVariable Long id){
-//        pessoaService.saveAdress(new Endereco(dados));
+        var pessoa = repository.getReferenceById(dados.id());
+        pessoa.adicionarEndereco(dados);
+
 
     }
+
+
 
 
 

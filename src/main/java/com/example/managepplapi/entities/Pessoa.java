@@ -1,5 +1,6 @@
 package com.example.managepplapi.entities;
 
+import com.example.managepplapi.dtos.AdicionaEnderecoDTO;
 import com.example.managepplapi.dtos.CriarPessoasDTO;
 import com.example.managepplapi.dtos.EditarPessoaDTO;
 import com.example.managepplapi.dtos.EnderecoDTO;
@@ -31,7 +32,7 @@ public class Pessoa {
     private LocalDate dataDeNascimento;
 
 
-    @Embedded
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Endereco> enderecos = new ArrayList<>();
 
     private Boolean cadastrada;
@@ -40,7 +41,7 @@ public class Pessoa {
         this.cadastrada = true;
         this.nome = dados.nome();
         this.dataDeNascimento = dados.dataDeNascimento();
-        for(EnderecoDTO enderecoDTO : dados.enderecos()){
+        for (EnderecoDTO enderecoDTO : dados.enderecos()) {
             this.enderecos.add(new Endereco(enderecoDTO));
         }
     }
@@ -52,13 +53,16 @@ public class Pessoa {
         if (dados.dataDeNascimento() != null) {
             this.dataDeNascimento = dados.dataDeNascimento();
         }
-            if (dados.endereco() != null && this.enderecos != null) {
-                for (Endereco e : enderecos) {
-                    e.atualizarDadosEndereco(dados.endereco());
-                }
+        if (dados.endereco() != null && this.enderecos != null) {
+            for (Endereco e : enderecos) {
+                e.atualizarDadosEndereco(dados.endereco());
             }
         }
-
-
     }
+
+
+    public void adicionarEndereco(AdicionaEnderecoDTO novoEndereco) {
+        this.enderecos.add(novoEndereco);
+    }
+}
 
