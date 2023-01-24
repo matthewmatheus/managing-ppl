@@ -27,14 +27,9 @@ public class EnderecosController {
     public void adicionarEndereco(@RequestBody @Valid EnderecoDTO dados, @PathVariable Long id) {
 
         Pessoa pessoa = pessoaService.findById(id);
-        Endereco newAdress = new Endereco();
-        newAdress.setLogradouro(dados.logradouro());
-        newAdress.setCep(dados.cep());
-        newAdress.setNumero(dados.numero());
-        newAdress.setCidade(dados.cidade());
-        pessoa.getEnderecos().add(newAdress);
-        pessoa.setEnderecos(pessoa.getEnderecos());
+        Endereco newAdress = new Endereco(dados);
 
+        pessoa.getEnderecos().add(newAdress);
         pessoaService.save(pessoa);
 
 
