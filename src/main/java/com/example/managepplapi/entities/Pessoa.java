@@ -62,7 +62,7 @@ public class Pessoa {
 
 
     public void adicionarEndereco(AdicionaEnderecoDTO novoEndereco) {
-
+        this.enderecos.add(new Endereco(novoEndereco.novoEndereco()));
     }
 }
 

@@ -4,6 +4,7 @@ import com.example.managepplapi.dtos.CriarPessoasDTO;
 import com.example.managepplapi.dtos.EditarPessoaDTO;
 import com.example.managepplapi.dtos.EnderecoDTO;
 import com.example.managepplapi.dtos.ListagemDePessoasDTO;
+import com.example.managepplapi.entities.Endereco;
 import com.example.managepplapi.entities.Pessoa;
 import com.example.managepplapi.exceptions.PessoaNaoEncontradaException;
 import com.example.managepplapi.repositories.PessoasRepository;
@@ -44,6 +45,7 @@ class PessoasControllerTest {
     @InjectMocks
     private PessoasController controller;
     private EnderecoDTO endereco;
+
 
     private Pessoa pessoa;
     private CriarPessoasDTO newPessoa;
@@ -126,7 +128,13 @@ class PessoasControllerTest {
     @Test
     void deveriaAdicionarUmEnderecoParaAPessoa() {
 
+        pessoasService.save(pessoa);
 
+        EnderecoDTO end2 = new EnderecoDTO("Rua dos testezinhos", "4342-1234", "323", "São José dos Testinhos");
+
+
+
+//        pessoa.adicionarEndereco(new Endereco(end2));
 
     }
 

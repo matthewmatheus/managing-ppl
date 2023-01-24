@@ -30,11 +30,7 @@ public class PessoaServiceImpl implements PessoasService {
         return repository.findById(id) .orElseThrow(() -> new PessoaNaoEncontradaException(id));
     }
 
-    @Override
-    public List <Endereco> saveAdress(Endereco endereco) {
-//        repository.save(endereco);
-        return Collections.singletonList(endereco);
-    }
+
 
 
 }
