@@ -2,6 +2,7 @@ package com.example.managepplapi.entities;
 
 import com.example.managepplapi.dtos.CriarPessoasDTO;
 import com.example.managepplapi.dtos.EditarPessoaDTO;
+import com.example.managepplapi.dtos.EnderecoDTO;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -39,7 +40,9 @@ public class Pessoa {
         this.cadastrada = true;
         this.nome = dados.nome();
         this.dataDeNascimento = dados.dataDeNascimento();
-        this.enderecos = dados.enderecos();
+        for(EnderecoDTO enderecoDTO : dados.enderecos()){
+            this.enderecos.add(new Endereco(enderecoDTO));
+        }
     }
 
     public void atualizarDadosDaPessoa(EditarPessoaDTO dados) {
