@@ -39,7 +39,7 @@ public class Pessoa {
         this.cadastrada = true;
         this.nome = dados.nome();
         this.dataDeNascimento = dados.dataDeNascimento();
-        this.enderecos.add(new Endereco(dados.endereco()));
+        this.enderecos = dados.enderecos();
     }
 
     public void atualizarDadosDaPessoa(EditarPessoaDTO dados) {
@@ -49,13 +49,13 @@ public class Pessoa {
         if (dados.dataDeNascimento() != null) {
             this.dataDeNascimento = dados.dataDeNascimento();
         }
-        if (dados.endereco() != null && this.enderecos != null) {
-            for (Endereco e : enderecos) {
-                e.atualizarDadosEndereco(dados.endereco());
+            if (dados.endereco() != null && this.enderecos != null) {
+                for (Endereco e : enderecos) {
+                    e.atualizarDadosEndereco(dados.endereco());
+                }
             }
         }
+
+
     }
-
-
-}
 

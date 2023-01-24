@@ -6,6 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 
 @Embeddable
 @Data
@@ -25,6 +27,8 @@ public class Endereco {
         this.numero = dados.numero();
         this.cidade = dados.cidade();
     }
+
+
 
     public void atualizarDadosEndereco(EnderecoDTO dados) {
         if (dados.logradouro() != null) {
