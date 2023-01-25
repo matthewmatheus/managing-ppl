@@ -33,14 +33,17 @@ public class PessoasController {
     @PostMapping
     @Transactional
     public void criarPessoa(@RequestBody @Valid CriarPessoasDTO dados) {
+        Endereco enderecoNovo = new Endereco();
         Pessoa pessoa = new Pessoa();
         pessoa.setNome(dados.nome());
         pessoa.setDataDeNascimento(dados.dataDeNascimento());
         pessoa.setCadastrada(true);
         List<Endereco> enderecos = new ArrayList<>();
         for (EnderecoDTO enderecoDTO : dados.enderecos()) {
-            enderecos.add(new Endereco(enderecoDTO));
+             enderecoNovo = new Endereco(enderecoDTO);
+            enderecos.add(enderecoNovo);
         }
+        enderecoNovo.setPessoa(pessoa);
         pessoa.setEnderecos(enderecos);
         pessoaService.save(pessoa);
     }
@@ -67,8 +70,6 @@ public class PessoasController {
         return repository.findAllByCadastradaTrue(paginacao).map(ListagemDePessoasDTO::new);
 
     }
-
-
 
 
 }

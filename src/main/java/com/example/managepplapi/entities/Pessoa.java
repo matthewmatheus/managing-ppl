@@ -1,6 +1,5 @@
 package com.example.managepplapi.entities;
 
-import com.example.managepplapi.dtos.AdicionaEnderecoDTO;
 import com.example.managepplapi.dtos.CriarPessoasDTO;
 import com.example.managepplapi.dtos.EditarPessoaDTO;
 import com.example.managepplapi.dtos.EnderecoDTO;
@@ -44,6 +43,7 @@ public class Pessoa {
         for (EnderecoDTO enderecoDTO : dados.enderecos()) {
             this.enderecos.add(new Endereco(enderecoDTO));
         }
+
     }
 
     public void atualizarDadosDaPessoa(EditarPessoaDTO dados) {

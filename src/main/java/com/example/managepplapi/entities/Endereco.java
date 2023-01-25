@@ -2,6 +2,7 @@ package com.example.managepplapi.entities;
 
 import com.example.managepplapi.dtos.EnderecoDTO;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -34,6 +35,7 @@ public class Endereco {
         this.cep = dados.cep();
         this.numero = dados.numero();
         this.cidade = dados.cidade();
+        this.pessoa = dados.pessoa();
     }
 
 

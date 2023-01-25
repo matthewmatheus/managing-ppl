@@ -50,6 +50,7 @@ public class EnderecosController {
             newAdress.setCep(dados.cep());
             newAdress.setNumero(dados.numero());
             newAdress.setCidade(dados.cidade());
+            newAdress.setPessoa(pessoa);
             pessoa.getEnderecos().add(newAdress);
             pessoaService.save(pessoa);
         }
