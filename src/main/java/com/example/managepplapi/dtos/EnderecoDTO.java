@@ -22,8 +22,6 @@ public record EnderecoDTO(
         String numero,
         @NotBlank
         @JsonProperty("cidade")
-        String cidade,
-        @NotNull
-        Boolean principal
+        String cidade
 ) {
 }
