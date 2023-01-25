@@ -3,7 +3,6 @@ package com.example.managepplapi.entities;
 import com.example.managepplapi.dtos.CriarPessoasDTO;
 import com.example.managepplapi.dtos.EditarPessoaDTO;
 import com.example.managepplapi.dtos.EnderecoDTO;
-import com.example.managepplapi.validation.ValidEnderecos;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -32,7 +31,6 @@ public class Pessoa {
     private LocalDate dataDeNascimento;
 
 
-    @ValidEnderecos
     @OneToMany(cascade = CascadeType.ALL)
     private List<Endereco> enderecos = new ArrayList<>();
 

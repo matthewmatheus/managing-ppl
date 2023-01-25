@@ -38,9 +38,23 @@ public class PessoasController {
         pessoa.setDataDeNascimento(dados.dataDeNascimento());
         pessoa.setCadastrada(true);
         List<Endereco> enderecos = new ArrayList<>();
+        int i = 0;
+        boolean principalJaAdicionado = false;
         for (EnderecoDTO enderecoDTO : dados.enderecos()) {
             Endereco enderecoNovo = new Endereco(enderecoDTO);
             enderecoNovo.setPessoa(pessoa);
+            if(dados.enderecos().size() > 1) {
+               if(i == 0) {
+                   enderecoNovo.setPrincipal(true);
+                   i++;
+                   principalJaAdicionado = true;
+               } else{
+                   if(!principalJaAdicionado) {
+                       enderecoNovo.setPrincipal(true);
+                       principalJaAdicionado = true;
+                   }
+               }
+            }
             enderecos.add(enderecoNovo);
         }
         pessoa.setEnderecos(enderecos);
