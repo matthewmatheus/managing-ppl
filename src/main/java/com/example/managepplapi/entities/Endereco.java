@@ -38,6 +38,7 @@ public class Endereco {
         this.cep = dados.cep();
         this.numero = dados.numero();
         this.cidade = dados.cidade();
+        this.principal = false;
     }
 
 
