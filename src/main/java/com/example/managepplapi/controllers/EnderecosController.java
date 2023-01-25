@@ -56,11 +56,9 @@ public class EnderecosController {
     }
 
     @GetMapping("/lista/{id}")
-    public List<ListagemEnderecosDTO> listarEnderecosPessoa(@PathVariable Long id) {
+    public List<Endereco> listarEnderecosPessoa(@PathVariable Long id) {
+        return pessoaService.findAllEnderecos(id);
 
-        pessoaService.findAllEnderecos(id);
-
-        return null;
     }
 
 

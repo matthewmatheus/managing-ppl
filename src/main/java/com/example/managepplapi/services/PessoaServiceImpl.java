@@ -1,19 +1,14 @@
 package com.example.managepplapi.services;
 
-import com.example.managepplapi.dtos.ListagemDePessoasDTO;
+import com.example.managepplapi.dtos.ListagemEnderecosDTO;
 import com.example.managepplapi.entities.Endereco;
 import com.example.managepplapi.entities.Pessoa;
 import com.example.managepplapi.exceptions.PessoaNaoEncontradaException;
 import com.example.managepplapi.repositories.PessoasRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
 import java.util.List;
-import java.util.Set;
 
 @Service
 public class PessoaServiceImpl implements PessoasService {
@@ -34,8 +29,9 @@ public class PessoaServiceImpl implements PessoasService {
 
 
     @Override
-    public Pessoa findAllEnderecos(Long id) {
-        return repository.findAllEnderecos(id);
+    public List<Endereco> findAllEnderecos(Long id) {
+        List<Endereco> enderecos = repository.findAllEnderecosByPessoaId(id);
+        return enderecos;
     }
 
 
