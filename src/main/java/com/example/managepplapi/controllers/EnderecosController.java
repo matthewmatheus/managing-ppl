@@ -56,6 +56,10 @@ public class EnderecosController {
 
     }
 
+    public void alterarEnderecoPrincipal(){
+
+    }
+
 
 }
 
