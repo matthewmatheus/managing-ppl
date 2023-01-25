@@ -52,7 +52,7 @@ class PessoasControllerTest {
 
     @BeforeEach
     void setUp() {
-        endereco = new EnderecoDTO("Rua dos testes", "0424-004", "1020", "São José dos Testes");
+        endereco = new EnderecoDTO("Rua dos testes", "0424-004", "1020", "São José dos Testes", true);
         newPessoa = new CriarPessoasDTO("Testinho", LocalDate.now(), Collections.singletonList(endereco));
         pessoa = new Pessoa(newPessoa);
     }
@@ -106,7 +106,7 @@ class PessoasControllerTest {
         pessoasService.save(pessoa);
         pessoa.setCadastrada(true);
 
-        EnderecoDTO end2 = new EnderecoDTO("Rua dos testinhos", "1234-023", "421", "São José dos Testinhos");
+        EnderecoDTO end2 = new EnderecoDTO("Rua dos testinhos", "1234-023", "421", "São José dos Testinhos", false);
         CriarPessoasDTO newP2 = new CriarPessoasDTO("Testinha", LocalDate.now(), Collections.singletonList(end2));
         Pessoa p2 = new Pessoa(newP2);
         pessoasService.save(p2);
@@ -130,7 +130,7 @@ class PessoasControllerTest {
 
         pessoasService.save(pessoa);
 
-        EnderecoDTO end2 = new EnderecoDTO("Rua dos testezinhos", "4342-1234", "323", "São José dos Testinhos");
+        EnderecoDTO end2 = new EnderecoDTO("Rua dos testezinhos", "4342-1234", "323", "São José dos Testinhos", true);
 
 
 
