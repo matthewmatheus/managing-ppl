@@ -33,17 +33,16 @@ public class PessoasController {
     @PostMapping
     @Transactional
     public void criarPessoa(@RequestBody @Valid CriarPessoasDTO dados) {
-        Endereco enderecoNovo = new Endereco();
         Pessoa pessoa = new Pessoa();
         pessoa.setNome(dados.nome());
         pessoa.setDataDeNascimento(dados.dataDeNascimento());
         pessoa.setCadastrada(true);
         List<Endereco> enderecos = new ArrayList<>();
         for (EnderecoDTO enderecoDTO : dados.enderecos()) {
-             enderecoNovo = new Endereco(enderecoDTO);
+            Endereco enderecoNovo = new Endereco(enderecoDTO);
             enderecos.add(enderecoNovo);
+            enderecoNovo.setPessoa(pessoa);
         }
-        enderecoNovo.setPessoa(pessoa);
         pessoa.setEnderecos(enderecos);
         pessoaService.save(pessoa);
     }

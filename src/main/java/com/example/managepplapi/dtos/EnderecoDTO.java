@@ -10,8 +10,6 @@ import org.springframework.lang.Nullable;
 
 public record EnderecoDTO(
 
-        @Nullable
-        Pessoa pessoa,
         @JsonProperty("logradouro")
         @NotBlank
         String logradouro,
