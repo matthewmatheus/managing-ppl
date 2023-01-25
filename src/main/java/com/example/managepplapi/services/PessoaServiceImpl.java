@@ -1,4 +1,5 @@
 package com.example.managepplapi.services;
+
 import com.example.managepplapi.dtos.ListagemDePessoasDTO;
 import com.example.managepplapi.entities.Endereco;
 import com.example.managepplapi.entities.Pessoa;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class PessoaServiceImpl implements PessoasService {
@@ -27,10 +29,14 @@ public class PessoaServiceImpl implements PessoasService {
 
     @Override
     public Pessoa findById(Long id) {
-        return repository.findById(id) .orElseThrow(() -> new PessoaNaoEncontradaException(id));
+        return repository.findById(id).orElseThrow(() -> new PessoaNaoEncontradaException(id));
     }
 
 
+    @Override
+    public Pessoa findAllEnderecos(Long id) {
+        return repository.findAllEnderecos(id);
+    }
 
 
 }

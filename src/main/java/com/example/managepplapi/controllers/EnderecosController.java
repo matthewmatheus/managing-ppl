@@ -2,6 +2,7 @@ package com.example.managepplapi.controllers;
 
 import com.example.managepplapi.dtos.EnderecoDTO;
 import com.example.managepplapi.dtos.EnderecoDTOWrapper;
+import com.example.managepplapi.dtos.ListagemEnderecosDTO;
 import com.example.managepplapi.entities.Endereco;
 import com.example.managepplapi.entities.Pessoa;
 import com.example.managepplapi.repositories.PessoasRepository;
@@ -12,6 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -23,8 +26,11 @@ public class EnderecosController {
     private EnderecoService enderecoService;
 
     @Autowired
-    private PessoasRepository repository;
+    private PessoasRepository pessoasRepository;
     private EnderecoDTOWrapper dadosWrapper;
+
+    @Autowired
+
 
 
     public EnderecosController(PessoasService pessoaService) {
@@ -36,7 +42,7 @@ public class EnderecosController {
     public void adicionarEndereco(@RequestBody @Valid EnderecoDTOWrapper dadosWrapper, @PathVariable Long id) {
 
         EnderecoDTO dados = dadosWrapper.endereco();
-        Optional<Pessoa> pessoaOptional = repository.findById(id);
+        Optional<Pessoa> pessoaOptional = pessoasRepository.findById(id);
         if (pessoaOptional.isPresent()) {
             Pessoa pessoa = pessoaOptional.get();
             Endereco newAdress = new Endereco();
@@ -46,9 +52,17 @@ public class EnderecosController {
             newAdress.setCidade(dados.cidade());
             pessoa.getEnderecos().add(newAdress);
             pessoaService.save(pessoa);
-
-
         }
-
     }
+
+    @GetMapping("/lista/{id}")
+    public List<ListagemEnderecosDTO> listarEnderecosPessoa(@PathVariable Long id) {
+
+        pessoaService.findAllEnderecos(id);
+
+        return null;
+    }
+
+
 }
+
