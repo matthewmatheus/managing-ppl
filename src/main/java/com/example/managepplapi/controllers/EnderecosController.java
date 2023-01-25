@@ -21,21 +21,15 @@ import java.util.Optional;
 @RestController
 @RequestMapping("enderecos")
 public class EnderecosController {
-
-
     private PessoasService pessoaService;
-    private EnderecoService enderecoService;
-
     @Autowired
     private PessoasRepository pessoasRepository;
-    private EnderecoDTOWrapper dadosWrapper;
-
     @Autowired
-
 
     public EnderecosController(PessoasService pessoaService) {
         this.pessoaService = pessoaService;
     }
+
 
     @PostMapping("/{id}")
     @Transactional
@@ -55,7 +49,6 @@ public class EnderecosController {
             pessoaService.save(pessoa);
         }
     }
-
     @GetMapping("/lista/{id}")
     public ResponseEntity<List<Endereco>> listarEnderecosPessoa(@PathVariable Long id) {
         List<Endereco> enderecos = pessoaService.findAllEnderecos(id);

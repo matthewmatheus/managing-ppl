@@ -1,6 +1,7 @@
 package com.example.managepplapi.entities;
 
 import com.example.managepplapi.dtos.EnderecoDTO;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -27,14 +28,17 @@ public class Endereco {
 
     @ManyToOne
     @JoinColumn(name = "pessoa_id")
+    @JsonIgnore
     private Pessoa pessoa;
 
+    private Boolean principal;
 
     public Endereco(EnderecoDTO dados) {
         this.logradouro = dados.logradouro();
         this.cep = dados.cep();
         this.numero = dados.numero();
         this.cidade = dados.cidade();
+        this.principal = true;
     }
 
 
