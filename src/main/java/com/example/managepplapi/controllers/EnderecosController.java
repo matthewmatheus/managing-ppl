@@ -10,6 +10,7 @@ import com.example.managepplapi.services.EnderecoService;
 import com.example.managepplapi.services.PessoasService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,7 +31,6 @@ public class EnderecosController {
     private EnderecoDTOWrapper dadosWrapper;
 
     @Autowired
-
 
 
     public EnderecosController(PessoasService pessoaService) {
@@ -56,8 +56,9 @@ public class EnderecosController {
     }
 
     @GetMapping("/lista/{id}")
-    public List<Endereco> listarEnderecosPessoa(@PathVariable Long id) {
-        return pessoaService.findAllEnderecos(id);
+    public ResponseEntity<List<Endereco>> listarEnderecosPessoa(@PathVariable Long id) {
+        List<Endereco> enderecos = pessoaService.findAllEnderecos(id);
+        return ResponseEntity.ok(enderecos);
 
     }
 

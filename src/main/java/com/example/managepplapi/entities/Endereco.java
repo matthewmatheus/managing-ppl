@@ -24,6 +24,10 @@ public class Endereco {
     private String numero;
     private String cidade;
 
+    @ManyToOne
+    @JoinColumn(name = "pessoa_id")
+    private Pessoa pessoa;
+
 
     public Endereco(EnderecoDTO dados) {
         this.logradouro = dados.logradouro();

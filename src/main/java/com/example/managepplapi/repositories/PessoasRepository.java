@@ -21,6 +21,6 @@ public interface PessoasRepository extends JpaRepository<Pessoa, Long>{
     List<Endereco> findAllById(Long id);
 
 
-    @Query("SELECT p FROM Pessoa p JOIN FETCH p.enderecos WHERE p.id = :id")
+    @Query("SELECT e FROM Endereco e JOIN e.pessoa p ON p.id = :id")
     List<Endereco> findAllEnderecosByPessoaId(@Param("id") Long id);
 }
