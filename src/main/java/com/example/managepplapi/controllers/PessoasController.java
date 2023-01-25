@@ -40,8 +40,8 @@ public class PessoasController {
         List<Endereco> enderecos = new ArrayList<>();
         for (EnderecoDTO enderecoDTO : dados.enderecos()) {
             Endereco enderecoNovo = new Endereco(enderecoDTO);
-            enderecos.add(enderecoNovo);
             enderecoNovo.setPessoa(pessoa);
+            enderecos.add(enderecoNovo);
         }
         pessoa.setEnderecos(enderecos);
         pessoaService.save(pessoa);
