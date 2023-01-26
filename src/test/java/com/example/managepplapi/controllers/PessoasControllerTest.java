@@ -4,7 +4,6 @@ import com.example.managepplapi.dtos.CriarPessoasDTO;
 import com.example.managepplapi.dtos.EditarPessoaDTO;
 import com.example.managepplapi.dtos.EnderecoDTO;
 import com.example.managepplapi.dtos.ListagemDePessoasDTO;
-import com.example.managepplapi.entities.Endereco;
 import com.example.managepplapi.entities.Pessoa;
 import com.example.managepplapi.exceptions.PessoaNaoEncontradaException;
 import com.example.managepplapi.repositories.PessoasRepository;
@@ -48,13 +47,13 @@ class PessoasControllerTest {
 
 
     private Pessoa pessoa;
-    private CriarPessoasDTO newPessoa;
+    private CriarPessoasDTO pessoasDTO;
 
     @BeforeEach
     void setUp() {
         endereco = new EnderecoDTO("Rua dos testes", "0424-004", "1020", "São José dos Testes");
-        newPessoa = new CriarPessoasDTO("Testinho", LocalDate.now(), Collections.singletonList(endereco));
-        pessoa = new Pessoa(newPessoa);
+        pessoasDTO = new CriarPessoasDTO("Testinho", LocalDate.now(), Collections.singletonList(endereco));
+        pessoa = new Pessoa(pessoasDTO);
     }
 
 
@@ -62,8 +61,8 @@ class PessoasControllerTest {
     void deveriaCriarUmaPessoa() {
 
         //salvando pessoa
-        pessoasService.save(new Pessoa(newPessoa));
-        assertEquals("São José dos Testes", newPessoa.enderecos().get(0).cidade());
+        pessoasService.save(new Pessoa(pessoasDTO));
+        assertEquals("São José dos Testes", pessoasDTO.enderecos().get(0).cidade());
 
     }
 
@@ -125,18 +124,7 @@ class PessoasControllerTest {
 
     }
 
-    @Test
-    void deveriaAdicionarUmEnderecoParaAPessoa() {
 
-        pessoasService.save(pessoa);
-
-        EnderecoDTO end2 = new EnderecoDTO("Rua dos testezinhos", "4342-1234", "323", "São José dos Testinhos");
-
-
-
-//        pessoa.adicionarEndereco(new Endereco(end2));
-
-    }
 
 
 }
