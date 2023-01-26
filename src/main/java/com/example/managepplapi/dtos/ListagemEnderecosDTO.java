@@ -1,5 +1,4 @@
 package com.example.managepplapi.dtos;
-
 import com.example.managepplapi.entities.Endereco;
 import com.example.managepplapi.entities.Pessoa;
 

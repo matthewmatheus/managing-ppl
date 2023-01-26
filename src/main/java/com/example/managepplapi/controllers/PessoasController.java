@@ -1,7 +1,5 @@
 package com.example.managepplapi.controllers;
-
 import com.example.managepplapi.dtos.*;
-import com.example.managepplapi.entities.Endereco;
 import com.example.managepplapi.entities.Pessoa;
 import com.example.managepplapi.repositories.PessoasRepository;
 import com.example.managepplapi.services.PessoasService;
@@ -13,14 +11,10 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.List;
 
 @RestController
 @RequestMapping("pessoas")
 public class PessoasController {
-
-
     @Autowired
     private PessoasRepository repository;
     private PessoasService pessoaService;
@@ -33,32 +27,7 @@ public class PessoasController {
     @PostMapping
     @Transactional
     public void criarPessoa(@RequestBody @Valid CriarPessoasDTO dados) {
-        Pessoa pessoa = new Pessoa();
-        pessoa.setNome(dados.nome());
-        pessoa.setDataDeNascimento(dados.dataDeNascimento());
-        pessoa.setCadastrada(true);
-        List<Endereco> enderecos = new ArrayList<>();
-        int i = 0;
-        boolean principalJaAdicionado = false;
-        for (EnderecoDTO enderecoDTO : dados.enderecos()) {
-            Endereco enderecoNovo = new Endereco(enderecoDTO);
-            enderecoNovo.setPessoa(pessoa);
-            if(dados.enderecos().size() > 1) {
-               if(i == 0) {
-                   enderecoNovo.setPrincipal(true);
-                   i++;
-                   principalJaAdicionado = true;
-               } else{
-                   if(!principalJaAdicionado) {
-                       enderecoNovo.setPrincipal(true);
-                       principalJaAdicionado = true;
-                   }
-               }
-            }
-            enderecos.add(enderecoNovo);
-        }
-        pessoa.setEnderecos(enderecos);
-        pessoaService.save(pessoa);
+       pessoaService.criaPessoa(dados);
     }
 
 

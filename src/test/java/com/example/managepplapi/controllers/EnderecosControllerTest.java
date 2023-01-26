@@ -32,13 +32,10 @@ import static org.mockito.Mockito.*;
 @ExtendWith(MockitoExtension.class)
 class EnderecosControllerTest {
     private MockMvc mockMvc;
-
     @InjectMocks
     private EnderecosController controller;
-
     @Mock
     private PessoasService pessoasService;
-
     @Mock
     private PessoasRepository pessoasRepository;
     private EnderecoDTO endereco;
@@ -46,7 +43,6 @@ class EnderecosControllerTest {
     private Pessoa pessoa;
     private EnderecoDTO end3;
     private EnderecoDTO end2;
-
 
     @BeforeEach
     void setUp() {
@@ -88,7 +84,6 @@ class EnderecosControllerTest {
         Long id = 1l;
 
         when(pessoasService.findAllEnderecos(id)).thenReturn(pessoa.getEnderecos());
-
         ResponseEntity<List<Endereco>> response = controller.listarEnderecosPessoa(id);
 
         verify(pessoasService,times(1)).findAllEnderecos(id);
@@ -98,7 +93,7 @@ class EnderecosControllerTest {
 
 
     @Test
-    @DisplayName("Deveria alterar o endereco principal e retornar o novo endereco principal")
+    @DisplayName("Deveria alterar o endereco principal atual e retornar o novo endereco principal")
     void deveriaAlterarOEnderecoPrincipal() {
         Long id = 1l;
         pessoa.setId(id);

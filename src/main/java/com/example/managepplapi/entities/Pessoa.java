@@ -1,5 +1,4 @@
 package com.example.managepplapi.entities;
-
 import com.example.managepplapi.dtos.CriarPessoasDTO;
 import com.example.managepplapi.dtos.EditarPessoaDTO;
 import com.example.managepplapi.dtos.EnderecoDTO;
@@ -9,11 +8,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-
 @Data
 @Entity
 @Table(name = "pessoas")
@@ -26,15 +23,12 @@ public class Pessoa {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nome;
-
     @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate dataDeNascimento;
-
-
     @OneToMany(cascade = CascadeType.ALL)
     private List<Endereco> enderecos = new ArrayList<>();
-
     private Boolean cadastrada;
+
 
     public Pessoa(CriarPessoasDTO dados) {
         this.cadastrada = true;
@@ -43,8 +37,8 @@ public class Pessoa {
         for (EnderecoDTO enderecoDTO : dados.enderecos()) {
             this.enderecos.add(new Endereco(enderecoDTO));
         }
-
     }
+
 
     public void atualizarDadosDaPessoa(EditarPessoaDTO dados) {
         if (dados.nome() != null) {

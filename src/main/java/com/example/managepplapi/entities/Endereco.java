@@ -1,16 +1,10 @@
 package com.example.managepplapi.entities;
-
 import com.example.managepplapi.dtos.EnderecoDTO;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.util.List;
-
-
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -41,8 +35,6 @@ public class Endereco {
         this.principal = false;
     }
 
-
-
     public void atualizarDadosEndereco(EnderecoDTO dados) {
         if (dados.logradouro() != null) {
             this.logradouro = dados.logradouro();
@@ -57,6 +49,4 @@ public class Endereco {
             this.cidade = dados.cidade();
         }
     }
-
-
 }
