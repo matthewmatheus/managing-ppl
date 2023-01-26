@@ -22,10 +22,10 @@ public class PessoaServiceImpl implements PessoasService {
         return pessoa;
     }
 
-    @Override
-    public Pessoa findById(Long id) {
-        return repository.findById(id).orElseThrow(() -> new PessoaNaoEncontradaException(id));
-    }
+        @Override
+        public Pessoa findById(Long id) {
+            return repository.findById(id).orElseThrow(() -> new PessoaNaoEncontradaException(id));
+        }
 
 
     @Override

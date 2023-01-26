@@ -1,6 +1,4 @@
 package com.example.managepplapi.dtos;
-
-
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
@@ -9,7 +7,6 @@ import java.time.LocalDate;
 import java.util.List;
 
 public record CriarPessoasDTO(
-
         @NotBlank
         String nome,
         @NotNull
@@ -19,7 +16,7 @@ public record CriarPessoasDTO(
         List <EnderecoDTO> enderecos
 
 
-) {
+){
 
 
 }

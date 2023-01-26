@@ -27,6 +27,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.when;
 
 @SpringBootTest
@@ -59,10 +60,8 @@ class PessoasControllerTest {
 
     @Test
     void deveriaCriarUmaPessoa() {
-
-        //salvando pessoa
-        pessoasService.save(new Pessoa(pessoasDTO));
-        assertEquals("São José dos Testes", pessoasDTO.enderecos().get(0).cidade());
+        pessoasService.save(pessoa);
+        assertEquals("São José dos Testes", pessoa.getEnderecos().get(0).getCidade());
 
     }
 
@@ -73,9 +72,9 @@ class PessoasControllerTest {
         pessoa.setId(1l);
         //salvando pessoa como "Testinho"
 
-        EditarPessoaDTO pessoaAtualziada = new EditarPessoaDTO(1l, "TestinhA", LocalDate.now(), endereco);
-        repository.getReferenceById(pessoaAtualziada.id());
-        pessoa.atualizarDadosDaPessoa(pessoaAtualziada);
+        EditarPessoaDTO pessoaAtualizada = new EditarPessoaDTO(1l, "TestinhA", LocalDate.now(), endereco);
+        repository.getReferenceById(pessoaAtualizada.id());
+        pessoa.atualizarDadosDaPessoa(pessoaAtualizada);
         //editando pessoa para TestinhA
 
         assertEquals("TestinhA", pessoa.getNome());
@@ -93,11 +92,18 @@ class PessoasControllerTest {
     }
 
     @Test
-    void deveriaLancarExceptionPessoaNaoEncontrada() {
+    void deveriaLancarExceptionPessoaNaoEncontrada() throws Exception {
+        pessoasService.save(pessoa);
         pessoa.setId(1l);
-        // criando e setando Id da pessoa porém não salvando
+        Long id = 2l;
 
-        assertThrows(PessoaNaoEncontradaException.class, () -> pessoasService.findById(1l));
+        when(pessoasService.findById(id)).thenThrow(new PessoaNaoEncontradaException(id));
+
+        Throwable exception = assertThrows(PessoaNaoEncontradaException.class, () -> {
+            controller.consultarPessoaPorId(id);
+        });
+
+        assertThat(exception.getMessage()).isEqualTo("Não foi possível encontrar a pessoa de id " + id + " !");
     }
 
     @Test
@@ -123,8 +129,6 @@ class PessoasControllerTest {
 
 
     }
-
-
 
 
 }

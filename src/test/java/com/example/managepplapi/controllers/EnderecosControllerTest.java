@@ -1,5 +1,6 @@
 package com.example.managepplapi.controllers;
 
+import com.example.managepplapi.dtos.AlterarEnderecoPrincipalDTO;
 import com.example.managepplapi.dtos.CriarPessoasDTO;
 import com.example.managepplapi.dtos.EnderecoDTO;
 import com.example.managepplapi.dtos.EnderecoDTOWrapper;
@@ -61,8 +62,10 @@ class EnderecosControllerTest {
 
         pessoaDTO = new CriarPessoasDTO("Testinho", LocalDate.now(), enderecos);
         pessoa = new Pessoa(pessoaDTO);
-
-
+        pessoa.getEnderecos().get(0).setPrincipal(true);
+        pessoa.getEnderecos().get(0).setId(1l);
+        pessoa.getEnderecos().get(1).setId(2l);
+        pessoa.getEnderecos().get(2).setId(3l);
     }
 
 
@@ -93,4 +96,19 @@ class EnderecosControllerTest {
         assertEquals(3, response.getBody().size());
     }
 
+
+    @Test
+    @DisplayName("Deveria alterar o endereco principal e retornar o novo endereco principal")
+    void deveriaAlterarOEnderecoPrincipal() {
+        Long id = 1l;
+        pessoa.setId(id);
+
+        AlterarEnderecoPrincipalDTO novoPrincipal = new AlterarEnderecoPrincipalDTO(3l);
+
+        when(pessoasService.findById(id)).thenReturn(pessoa);
+        controller.alterarEnderecoPrincipal(id, novoPrincipal);
+
+        assertEquals(pessoa.getEnderecos().get(0).getPrincipal().booleanValue(), false);
+        assertEquals(pessoa.getEnderecos().get(2).getPrincipal().booleanValue(), true);
+    }
 }
