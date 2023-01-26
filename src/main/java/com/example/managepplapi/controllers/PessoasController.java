@@ -36,7 +36,6 @@ public class PessoasController {
     public void editarDadosPessoa(@RequestBody @Valid EditarPessoaDTO dados) {
         var pessoa = repository.getReferenceById(dados.id());
         pessoa.atualizarDadosDaPessoa(dados);
-
     }
 
     @GetMapping("/{id}")

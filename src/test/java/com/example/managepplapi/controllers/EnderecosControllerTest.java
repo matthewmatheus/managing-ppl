@@ -1,5 +1,4 @@
 package com.example.managepplapi.controllers;
-
 import com.example.managepplapi.dtos.AlterarEnderecoPrincipalDTO;
 import com.example.managepplapi.dtos.CriarPessoasDTO;
 import com.example.managepplapi.dtos.EnderecoDTO;
@@ -19,12 +18,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 

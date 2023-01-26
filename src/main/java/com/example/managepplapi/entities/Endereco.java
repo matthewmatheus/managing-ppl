@@ -24,7 +24,6 @@ public class Endereco {
     @JoinColumn(name = "pessoa_id")
     @JsonIgnore
     private Pessoa pessoa;
-
     private Boolean principal;
 
     public Endereco(EnderecoDTO dados) {
