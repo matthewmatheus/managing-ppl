@@ -1,5 +1,5 @@
-# Managing ppl
-RestAPI simples construída com Spring em 5 dias.
+# Managing-ppl
+RestAPI simples desenvolvida com Spring em 5 dias.
 
 
 ![Badge de status do projeto](http://img.shields.io/static/v1?label=status&message=em%20construção&color=orange)
@@ -10,7 +10,7 @@ Foram usadas as seguintes tecnologias ao desenvolver esse projeto:
 
 - Java 17
 - Maven
-- Spring Boot, Data JPA.
+- Spring Boot, Data JPA, Validation.
 - Lombok
 - Hibernate
 - H2 DataBase
